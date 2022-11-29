@@ -1,0 +1,50 @@
+{
+  "clients": [
+    {
+      "id": 1,
+      "name": "Amazon",
+      "pendingAmount": 1000,
+      "paidAmount": "765"
+    },
+    {
+      "id": 2,
+      "name": "Ottoman",
+      "pendingAmount": 176,
+      "paidAmount": "909"
+    },
+    {
+      "id": 3,
+      "name": "Python",
+      "pendingAmount": 2332,
+      "paidAmount": 243
+    },
+    {
+      "id": 4,
+      "name": "Bachelorette",
+      "pendingAmount": 0,
+      "paidAmount": 0
+    }
+  ],
+  "bills": [
+    {
+      "client": "Amazon",
+      "amountToPay": "879",
+      "id": 1
+    },
+    {
+      "client": "Ottoman",
+      "amountToPay": "89",
+      "id": 2
+    },
+    {
+      "client": "Python",
+      "amountToPay": "456",
+      "id": 3
+    },
+    {
+      "client": "Python",
+      "amountToPay": "876",
+      "id": 4
+    }
+  ]
+}

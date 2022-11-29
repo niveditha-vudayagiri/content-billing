@@ -1,0 +1,102 @@
+<div class="container m-1">
+    <div class="row">
+        <div class="col-3"></div>
+        <div class="col-6 m-3">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Client Name" [(ngModel)]="addClientName">
+                <button class="btn btn-outline-secondary" type="button" id="addClientName" (click)=addClient()>Add</button>
+              </div> 
+        </div>
+        <div class="col-3"></div>
+    </div>
+
+    <!-- Display list of Clients -->
+    <div class="row mt-10">
+        <div class="col-2"></div>
+        <div class="col-8 mt-3">
+            <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Amount Pending</th>
+                    <th scope="col">Amount Paid</th>
+                    <th scope="row"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let client of clientArr">
+                    <th scope="row">{{client.id}}</th>
+                    <td>{{client.name}}</td>
+                    <td>{{client.pendingAmount}}</td>
+                    <td>{{client.paidAmount}}</td>
+                    <td><button type="button" class="btn btn-primary ms-2" (click)=callEdit(client) data-bs-toggle="modal" data-bs-target="#editClientModal">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
+                        <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"/>
+                      </svg>
+                    </button>
+                      <button type="button" class="btn btn-secondary ms-2" (click)=callDelete(client) data-bs-toggle="modal" data-bs-target="#deleteClientModal">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3-fill" viewBox="0 0 16 16">
+                          <path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z"/>
+                        </svg>
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              
+            <!--Edit Modal -->
+            <div class="modal fade" id="editClientModal" tabindex="-1">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Client</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" #closeEditClientModal></button>
+                  </div>
+                  <div class="modal-body">
+                    <div class="mt-3">
+                      <label for="clientnameedit" class="form-label">Client Name</label><br/>
+                      <input id="clientnameedit" type="text" class="form-control" placeholder="Client Name" [(ngModel)]="editClientObj.name">
+                    </div> 
+                    <div class="mt-3">
+                      <label for="pendingamountedit" class="form-label">Pending Amount</label><br/>
+                      <input id="pendingamountedit" type="text" class="form-control" placeholder="Client Name" [(ngModel)]="editClientObj.pendingAmount">
+                    </div> 
+                    <div class="mt-3">
+                      <label for="paidamountedit" class="form-label">Paid Amount</label><br/>
+                      <input id="paidamountedit" type="text" class="form-control" placeholder="Client Name" [(ngModel)]="editClientObj.paidAmount">
+                    </div> 
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)=editClient()>Save changes</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!--Delele Modal -->
+            <div class="modal fade" id="deleteClientModal" tabindex="-1">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Client</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" #closeDeleteClientModal></button>
+                  </div>
+                  <div class="modal-body">
+                      Are you sure?
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)=deleteClient()>Yes</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+        </div>
+        <div class="col-2"></div>
+    </div>
+</div>
+
+
